@@ -1,12 +1,13 @@
 import React from 'react';
 import './Navbar.css'; // Importa nosso arquivo de estilos
+import logoImage from '../../assets/logo.png'; // 1. IMPORTA A IMAGEM DO LOGO
 
 const Navbar = () => {
   return (
     <nav className="navbar-container">
       <div className="navbar-logo">
-        {/* Futuramente, colocaremos a imagem do logo aqui */}
-        Marcia Santos ART
+        {/* 2. USA A IMAGEM DO LOGO AQUI */}
+        <img src={logoImage} alt="Logo Marcia Santos Art" className="navbar-logo-image" />
       </div>
       <ul className="navbar-links">
         <li><a href="/">Home</a></li>
