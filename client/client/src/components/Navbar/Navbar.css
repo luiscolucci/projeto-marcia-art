@@ -32,3 +32,8 @@
 .navbar-links a:hover {
   color: #007bff; /* Uma cor de destaque para quando passar o mouse */
 }
+
+.navbar-logo-image {
+  height: 230px; /* Você pode ajustar esse valor como preferir */
+  width: auto; /* Mantém a proporção da imagem */
+}
