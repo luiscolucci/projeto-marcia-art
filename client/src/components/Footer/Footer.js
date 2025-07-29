@@ -43,7 +43,7 @@ const Footer = () => {
       <div className="footer-bottom">
         &copy; {currentYear} Marcia Santos ART | Todos os direitos reservados.
         <br />
-        Desenvolvido por [SEU NOME OU NOME DA SUA EMPRESA]
+        Desenvolvido por Colucc[IA] | <li><a href="/contato">Portfólio</a></li>
       </div>
     </footer>
   );
