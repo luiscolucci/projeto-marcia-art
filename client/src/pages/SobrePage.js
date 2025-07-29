@@ -1,9 +1,9 @@
 import React from 'react';
 
-const LojaPage = () => {
+const SobrePage = () => {
   return (
     <div style={{ padding: '4rem 2rem' }}>
-      <h1>Página Sobre</h1>
+      <h1>Pagina Sobre a Artista</h1>
       <p>Os Dados Sobre a Artista aparecerão aqui.</p>
     </div>
   );

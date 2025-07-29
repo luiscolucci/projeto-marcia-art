@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LojaPage = () => {
+const ContatoPage = () => {
   return (
     <div style={{ padding: '4rem 2rem' }}>
       <h1>Pagina de Contato</h1>

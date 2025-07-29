@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LojaPage = () => {
+const BlogPage = () => {
   return (
     <div style={{ padding: '4rem 2rem' }}>
-      <h1>Página da Loja</h1>
-      <p>Os produtos do Blog (e-commerce) aparecerão aqui.</p>
+      <h1>Pagina do Blog</h1>
+      <p>O conteudo do Blog aparecerá aqui.</p>
     </div>
   );
 };
