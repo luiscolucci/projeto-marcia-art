@@ -1,22 +1,44 @@
 import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar/Navbar'; // Importa nosso Navbar
-import Hero from './components/Hero/Hero';
-import AboutSummary from './components/AboutSummary/AboutSummary';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // 1. Importa as ferramentas do Router
+
+// Importa os componentes que se repetem em todas as páginas
+import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+
+// Importa os componentes de cada página
+import HomePage from './pages/HomePage';
+import GaleriaPage from './pages/GaleriaPage';
+import LojaPage from './pages/LojaPage';
+import SobrePage from './pages/SobrePage';
+import BlogPage from './pages/BlogPage';
+import ContatoPage from './pages/ContatoPage';
+
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar /> {/* 1. USA O NOVO Navbar AQUI */}
-      <Hero /> {/* 2. USA O NOVO HERO AQUI */}
-      <AboutSummary /> {/* 3. USA O COMPONENTE AQUI */}
-      <Footer /> {/* 4. USA O COMPONENTE AQUI NO FINAL */}
-      <main style={{ padding: '2rem' }}>
-        <h1>Bem-vindos ao Projeto WEB Marcia</h1>
-        <p>Este é o conteúdo principal da página.</p>
-      </main>
-    </div>
+    // 2. O BrowserRouter envolve toda a aplicação para habilitar o roteamento
+    <BrowserRouter>
+      <div className="App">
+        {/* 3. Navbar e Footer ficam FORA do 'Routes' para aparecerem em todas as páginas */}
+        <Navbar />
+        
+        <main>
+          {/* 4. O 'Routes' define a área onde o conteúdo das páginas vai mudar */}
+          <Routes>
+            {/* 5. Cada 'Route' é uma regra: se a URL for 'path', mostre o 'element' */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/galeria" element={<GaleriaPage />} />
+            <Route path="/loja" element={<LojaPage />} />
+            <Route path="/sobre" element={<SobrePage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/contato" element={<ContatoPage />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
