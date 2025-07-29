@@ -1,0 +1,60 @@
+.hero-container {
+  /* Usaremos uma cor sólida por enquanto para simplificar */
+  background-image: url('../../assets/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  /*background-color: #4a4a4a; */
+  height: 80vh; /* Ocupa 80% da altura da tela */
+  
+  /* Centraliza o conteúdo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Camada de escurecimento para melhorar a leitura do texto sobre a imagem */
+.hero-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo preto com 40% de opacidade */
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.hero-title {
+  font-size: 3.0rem;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.hero-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
