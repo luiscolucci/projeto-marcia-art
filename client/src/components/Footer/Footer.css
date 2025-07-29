@@ -1,0 +1,79 @@
+.footer-container {
+  background-color: #2C2C2C; /* Nosso cinza escuro principal */
+  color: #a7a7a7;
+  padding: 3rem 2rem 1.5rem 2rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section.about p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-section .contact span {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-section.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section.links ul a {
+  color: #a7a7a7;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-section.links ul a:hover {
+  color: #ffffff;
+}
+
+.social-icons a {
+  color: #a7a7a7;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #444;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Ícones de Font Awesome (precisamos adicionar o link no HTML) */
+.fas, .fab {
+  margin-right: 8px;
+}
