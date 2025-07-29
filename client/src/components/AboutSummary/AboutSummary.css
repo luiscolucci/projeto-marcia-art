@@ -1,0 +1,49 @@
+.about-summary-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: #f9f9f9; /* Um fundo cinza bem claro para diferenciar da seção anterior */
+  gap: 3rem;
+}
+
+.about-summary-image img {
+  width: 270px;
+  height: 310px;
+  border-radius: 50%; /* Deixa a imagem redonda */
+  object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+  border: 5px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-summary-content {
+  max-width: 500px;
+}
+
+.about-summary-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #2C2C2C;
+}
+
+.about-summary-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.about-summary-button {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #2C2C2C; /* Cor principal do nosso site */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about-summary-button:hover {
+  background-color: #555;
+}
