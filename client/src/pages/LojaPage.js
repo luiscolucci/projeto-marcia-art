@@ -27,12 +27,18 @@ const LojaPage = () => {
                   currency: "BRL",
                 })}
               </p>
-              <button
+                {product.isAvailable ? (
+            <a 
+                href={`mailto:email.da.marcia@exemplo.com?subject=Interesse na obra: ${encodeURIComponent(product.title)}`} 
                 className="product-button"
-                disabled={!product.isAvailable}
-              >
-                {product.isAvailable ? "Adicionar ao Carrinho" : "Indisponível"}
-              </button>
+            >
+                Tenho Interesse
+            </a>
+        ) : (
+                <button className="product-button" disabled={true}>
+                    Vendido
+                </button>
+)}
             </div>
           </div>
         ))}
