@@ -66,7 +66,7 @@ const Footer = () => {
         <br />
         Desenvolvido por Luis Colucci |{" "}
         <li>
-          <a href="/contato">Meu Portfólio</a>
+          <a href="https://curriculo-643629858897.southamerica-east1.run.app/#inicio">Meu Portfólio</a>
         </li>
       </div>
     </footer>
