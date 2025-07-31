@@ -6,6 +6,7 @@ import Obra3 from "./assets/obra03.jpg";
 import Obra4 from "./assets/obra04.jpg";
 import Obra5 from "./assets/obra05.jpg";
 import Obra6 from "./assets/obra06.jpg";
+import Obra7 from "./assets/obra07.jpg";
 
 // Lista de obras da galeria
 export const galleryItems = [
@@ -44,6 +45,12 @@ export const galleryItems = [
     title: "Título da Obra 6",
     description: "Técnica e dimensões da obra 6",
     image: Obra6,
+  },
+  {
+    id: 7,
+    title: "Yemanjá",
+    description: "Técnica e dimensões da obra 7",
+    image: Obra7,
   },
   // Se tiver mais obras, pode adicionar mais objetos aqui seguindo o mesmo modelo
 ];
