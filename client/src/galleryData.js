@@ -12,7 +12,7 @@ export const galleryItems = [
   {
     id: 1,
     title: "O Vaso que Contém o Universo",
-    description: "Acrílica e posca sobre tela, 100 x 70 cm",
+    description: "Acrílica e posta sobre tela, 100 x 70 cm",
     image: Obra1, // Usa a variável importada
   },
   {
