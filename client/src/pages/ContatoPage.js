@@ -43,7 +43,7 @@ const ContatoPage = () => {
             </div>
             <div className="form-group">
               <label htmlFor="email">Seu E-mail</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" name="_replyto" required />
             </div>
             <div className="form-group">
               <label htmlFor="subject">Assunto</label>
@@ -53,6 +53,7 @@ const ContatoPage = () => {
               <label htmlFor="message">Mensagem</label>
               <textarea id="message" name="message" rows="6" required></textarea>
             </div>
+            <input type="hidden" name="_subject" value="Novo Contato do Site - Marcia Art!" />
             <button type="submit" className="submit-button">Enviar Mensagem</button>
           </form>
         </div>
