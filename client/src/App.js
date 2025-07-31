@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // 1. Importa a
 // Importa os componentes que se repetem em todas as páginas
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 // Importa os componentes de cada página
 import HomePage from './pages/HomePage';
@@ -19,6 +20,8 @@ function App() {
   return (
     // 2. O BrowserRouter envolve toda a aplicação para habilitar o roteamento
     <BrowserRouter>
+      <ScrollToTop />
+      
       <div className="App">
         {/* 3. Navbar e Footer ficam FORA do 'Routes' para aparecerem em todas as páginas */}
         <Navbar />

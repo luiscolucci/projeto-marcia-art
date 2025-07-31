@@ -6,6 +6,7 @@ import Obra3 from "./assets/obra03.jpg";
 import Obra4 from "./assets/obra04.jpg";
 import Obra5 from "./assets/obra05.jpg";
 import Obra6 from "./assets/obra06.jpg";
+import Obra7 from "./assets/obra07.jpg";
 
 // Lista de produtos da loja
 export const shopProducts = [
@@ -54,6 +55,14 @@ export const shopProducts = [
     title: "Título da Obra 6",
     description: "Técnica e dimensões da obra 6",
     image: Obra6,
+    price: 950.0,
+    isAvailable: true,
+  },
+  {
+    id: "prod7",
+    title: "Yemanja",
+    description: "Técnica e dimensões da obra 7",
+    image: Obra7,
     price: 950.0,
     isAvailable: true,
   },

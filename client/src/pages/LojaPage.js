@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'; // 1. Importa o componente Link
 import { shopProducts } from "../shopData"; // Importa nossa lista de produtos
 import "./LojaPage.css"; // Vamos criar este arquivo de estilo a seguir
 
@@ -28,12 +29,12 @@ const LojaPage = () => {
                 })}
               </p>
                 {product.isAvailable ? (
-            <a 
-                href={`mailto:email.da.marcia@exemplo.com?subject=Interesse na obra: ${encodeURIComponent(product.title)}`} 
-                className="product-button"
-            >
-                Tenho Interesse
-            </a>
+             <Link
+                  to={`/contato?obra=${encodeURIComponent(product.title)}`}
+                  className="product-button"
+                >
+                  Tenho Interesse
+                </Link>
         ) : (
                 <button className="product-button" disabled={true}>
                     Vendido
