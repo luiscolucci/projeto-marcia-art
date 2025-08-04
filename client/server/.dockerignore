@@ -1,0 +1,7 @@
+galleryData(Pode excluir).js
+shopData(Pode excluir).js
+# Ignora a pasta de dependências local, pois vamos instalá-las dentro do container.
+node_modules
+
+# Ignora os logs do npm.
+npm-debug.log

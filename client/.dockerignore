@@ -1,2 +1,8 @@
-galleryData(Pode excluir).js
-shopData(Pode excluir).js
+# Ignora a pasta de dependências local
+node_modules
+
+# Ignora a pasta de build local, caso exista
+build
+
+# Ignora arquivos de ambiente
+.env
