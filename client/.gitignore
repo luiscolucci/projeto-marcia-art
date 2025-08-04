@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 # Chave de serviço secreta do Firebase
 serviceAccountKey.json
+galleryData(Pode excluir).js
+shopData(Pode excluir).js
