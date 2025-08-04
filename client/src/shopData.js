@@ -12,16 +12,16 @@ import Obra7 from "./assets/obra07.jpg";
 export const shopProducts = [
   {
     id: "prod1",
-    title: "O Vaso que Contém o Universo",
-    description: "Acrílica e posca sobre tela, 100 x 70 cm",
+    title: "O Rio que transborda para Fluidez",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra1,
     price: 1250.0, // Preço em número, sem R$
     isAvailable: true,
   },
   {
     id: "prod2",
-    title: "Título da Obra 2",
-    description: "Técnica e dimensões da obra 2",
+    title: "Arte abstrata que retrata a alma do artista",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra2,
     price: 800.0,
     isAvailable: true,
@@ -29,31 +29,31 @@ export const shopProducts = [
   {
     id: "prod3",
     title: "O Vaso que Contém o Universo",
-    description: "Técnica e dimensões da obra 3",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra3,
     price: 2100.0,
-    isAvailable: true, // Exemplo de um produto indisponível
+    isAvailable: true, // "false" é o exemplo de um produto indisponível
   },
   {
     id: "prod4",
-    title: "Título da Obra 4",
-    description: "Técnica e dimensões da obra 4",
+    title: "O Sol que tras luz e calor para nossos corações",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra4,
     price: 950.0,
-    isAvailable: false,
+    isAvailable: true,
   },
   {
     id: "prod5",
-    title: "Título da Obra 5",
-    description: "Técnica e dimensões da obra 5",
+    title: "As flores de Outono",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra5,
     price: 950.0,
     isAvailable: true,
   },
   {
     id: "prod6",
-    title: "Título da Obra 6",
-    description: "Técnica e dimensões da obra 6",
+    title: "Uma cidade que nunca dorme",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra6,
     price: 950.0,
     isAvailable: true,
@@ -61,7 +61,7 @@ export const shopProducts = [
   {
     id: "prod7",
     title: "Yemanja",
-    description: "Técnica e dimensões da obra 7",
+    description: "Acrílica e fosca sobre tela, 100 x 70 cm",
     image: Obra7,
     price: 950.0,
     isAvailable: true,
