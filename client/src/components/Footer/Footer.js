@@ -18,7 +18,7 @@ const Footer = () => {
               <i className="fas fa-phone"></i> &nbsp; [SEU TELEFONE]
             </span>
             <span>
-              <i className="fas fa-envelope"></i> &nbsp; [SEU EMAIL]
+              <i className="fas fa-envelope"></i> &nbsp; marciasantosarts@gmail.com
             </span>
           </div>
         </div>
@@ -36,7 +36,7 @@ const Footer = () => {
               <a href="/sobre">Sobre a Artista</a>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <a href="/linha-do-tempo">Linha do Tempo</a>
             </li>
             <li>
               <a href="/contato">Contato</a>

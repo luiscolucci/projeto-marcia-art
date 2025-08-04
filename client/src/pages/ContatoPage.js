@@ -59,7 +59,7 @@ const ContatoPage = () => {
         </div>
         <div className="contact-info-container">
           <h3>Informações de Contato</h3>
-          <p><strong>Email:</strong><br />marciadossantos@gmail.com</p>
+          <p><strong>Email:</strong><br />marciasantosarts@gmail.com</p>
           <p><strong>Telefone:</strong><br />(11) 99999-8888</p>
           <p><strong>Ateliê:</strong><br />São Paulo, SP (Visitas com hora marcada)</p>
           
