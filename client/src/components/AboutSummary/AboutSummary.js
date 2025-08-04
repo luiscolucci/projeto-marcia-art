@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AboutSummary.css';
 import profileImage from '../../assets/profile-marcia.jpg'; // Importa a foto de perfil
 
@@ -13,7 +14,9 @@ const AboutSummary = () => {
         <p className="about-summary-text">
           Marcia Santos transforma telas em universos vibrantes de emoção e cor. Com uma trajetória marcada pela experimentação e uma profunda conexão com a natureza e o cosmos, cada obra é um convite para uma jornada sensorial única. Sua paixão pela arte é a força motriz que dá vida a cada pincelada.
         </p>
-        <button className="about-summary-button">Leia mais</button>
+        <Link to="/sobre" className="about-summary-button">
+          Leia Mais
+        </Link>
       </div>
     </section>
   );

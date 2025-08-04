@@ -1,5 +1,6 @@
 const express = require('express');
 const admin = require('firebase-admin');
+const cors = require('cors'); // 1. IMPORTA A BIBLIOTECA CORS
 const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
@@ -8,6 +9,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const app = express();
+app.use(cors()); // 2. DIZ AO EXPRESS PARA USAR O CORS E LIBERAR O ACESSO
 const PORT = 3001;
 
 app.get('/', (req, res) => {
