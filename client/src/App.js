@@ -11,7 +11,7 @@ import HomePage from './pages/HomePage';
 import GaleriaPage from './pages/GaleriaPage';
 import LojaPage from './pages/LojaPage';
 import SobrePage from './pages/SobrePage';
-import BlogPage from './pages/BlogPage';
+import TimelinePage from './pages/TimelinePage';
 import ContatoPage from './pages/ContatoPage';
 
 import './App.css';
@@ -21,7 +21,7 @@ function App() {
     // 2. O BrowserRouter envolve toda a aplicação para habilitar o roteamento
     <BrowserRouter>
       <ScrollToTop />
-      
+
       <div className="App">
         {/* 3. Navbar e Footer ficam FORA do 'Routes' para aparecerem em todas as páginas */}
         <Navbar />
@@ -34,7 +34,7 @@ function App() {
             <Route path="/galeria" element={<GaleriaPage />} />
             <Route path="/loja" element={<LojaPage />} />
             <Route path="/sobre" element={<SobrePage />} />
-            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/linha-do-tempo" element={<TimelinePage />} />
             <Route path="/contato" element={<ContatoPage />} />
           </Routes>
         </main>

@@ -1,0 +1,109 @@
+/* client/src/pages/TimelinePage.css */
+
+.timeline-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.timeline-header h1 {
+  font-size: 3rem;
+  color: #2C2C2C;
+}
+
+.timeline-header p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+/* A linha vertical central */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1rem 2rem;
+  margin-bottom: 3rem;
+}
+
+/* O ponto na linha do tempo */
+.timeline-dot {
+  position: absolute;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  background-color: #2C2C2C;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Posicionamento dos itens à esquerda e à direita */
+.timeline-item.left {
+  left: 0;
+  padding-right: 3rem;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  padding-left: 3rem;
+  text-align: left;
+}
+
+/* Posicionamento dos pontos para itens da esquerda e direita */
+.timeline-item.left .timeline-dot {
+  right: -7.5px;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -7.5px;
+}
+
+.timeline-content {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.timeline-year {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.timeline-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
