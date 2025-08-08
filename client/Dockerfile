@@ -1,35 +1,27 @@
 # --- Estágio 1: Build ---
-# Começamos com uma imagem do Node.js para ter as ferramentas de build (npm)
 FROM node:lts-alpine AS build
-
-# Define o diretório de trabalho
 WORKDIR /app
-
-# Copia os arquivos de definição de dependências
 COPY package.json ./
 COPY package-lock.json ./
-
-# Instala todas as dependências (incluindo as de desenvolvimento)
 RUN npm ci
-
-# Copia todo o resto do código do nosso frontend
 COPY . .
-
-# O comando mais importante: executa o script de build do React.
-# Isso vai gerar uma pasta 'build' com os arquivos estáticos otimizados.
 RUN npm run build
 
 # --- Estágio 2: Produção ---
-# Agora, usamos uma imagem de um servidor web super leve, o Nginx.
-# Ele é excelente para servir arquivos estáticos.
 FROM nginx:stable-alpine
 
-# Copia os arquivos estáticos que geramos no estágio anterior (da pasta 'build')
-# para a pasta padrão que o Nginx usa para servir conteúdo web.
+# Copia os arquivos estáticos que geramos no estágio anterior
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expõe a porta 80, que é a porta padrão para tráfego web (HTTP).
-EXPOSE 80
+# NOVO: Copia nosso script e nossa configuração customizada do Nginx
+COPY ./nginx/start-nginx.sh /start-nginx.sh
+COPY ./nginx/nginx.conf /etc/nginx/templates/nginx.conf
 
-# O comando para iniciar o servidor Nginx quando o container for executado.
-CMD ["nginx", "-g", "daemon off;"]
+# NOVO: Dá permissão para o script ser executado
+RUN chmod +x /start-nginx.sh
+
+# Expõe a porta 8080, a porta padrão que o Cloud Run usa
+EXPOSE 8080
+
+# NOVO: Usa nosso script customizado para iniciar o Nginx
+CMD ["/start-nginx.sh"]
