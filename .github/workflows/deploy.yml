@@ -58,6 +58,7 @@ jobs:
             --region ${{ env.GCP_REGION }} \
             --platform managed \
             --allow-unauthenticated
+            --port 3001
 
       # --- DEPLOY DO FRONTEND (CLIENT) ---
       - name: Build and Push Frontend Image
