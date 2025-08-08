@@ -13,7 +13,9 @@ const GaleriaPage = () => {
     const fetchObras = async () => {
       try {
         // Faz a chamada para a nossa API no backend
-        const response = await fetch("http://localhost:3001/api/obras");
+        const response = await fetch(
+          "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
+        );
 
         // Se a resposta não for OK (ex: erro 500 no servidor), lança um erro
         if (!response.ok) {
