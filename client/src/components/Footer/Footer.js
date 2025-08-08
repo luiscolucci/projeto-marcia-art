@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Mantém o Link para navegação correta
 import "./Footer.css";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear(); // Pega o ano atual automaticamente
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer-container">
@@ -13,13 +14,10 @@ const Footer = () => {
             Explorando o universo através das cores e formas. Cada obra é uma
             janela para a alma.
           </p>
-          <div className="contact">
-            <span>
-              <i className="fas fa-phone"></i> &nbsp; [SEU TELEFONE]
-            </span>
-            <span>
-              <i className="fas fa-envelope"></i> &nbsp; marciasantosarts@gmail.com
-            </span>
+          <div className="contact-info">
+            {/* Mantemos o texto simples, sem ícones aqui para um visual mais limpo */}
+            <span>Telefone: 11 98865-5838</span>
+            <span>Email: marciasantosarts@gmail.com</span>
           </div>
         </div>
 
@@ -27,34 +25,49 @@ const Footer = () => {
           <h3 className="footer-section-title">Navegação</h3>
           <ul>
             <li>
-              <a href="/galeria">Galeria</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/loja">Loja</a>
+              <Link to="/galeria">Galeria</Link>
             </li>
             <li>
-              <a href="/sobre">Sobre a Artista</a>
+              <Link to="/loja">Loja</Link>
             </li>
             <li>
-              <a href="/linha-do-tempo">Linha do Tempo</a>
+              <Link to="/sobre">Sobre a Artista</Link>
             </li>
             <li>
-              <a href="/contato">Contato</a>
+              <Link to="/linha-do-tempo">Linha do Tempo</Link>
+            </li>
+            <li>
+              <Link to="/contato">Contato</Link>
             </li>
           </ul>
         </div>
 
         <div className="footer-section social">
           <h3 className="footer-section-title">Redes Sociais</h3>
+          {/* VOLTAMOS A USAR AS TAGS <i> DO FONT AWESOME */}
           <div className="social-icons">
-            {/* Substitua '#' pelos links reais das redes sociais */}
-            <a href="#">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="#">
+            <a
+              href="https://pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fab fa-pinterest-p"></i>
             </a>
           </div>
@@ -64,10 +77,16 @@ const Footer = () => {
       <div className="footer-bottom">
         &copy; {currentYear} Marcia Santos ART | Todos os direitos reservados.
         <br />
-        Desenvolvido por Luis Colucci |{" "}
-        <li>
-          <a href="https://curriculo-643629858897.southamerica-east1.run.app/#inicio">Meu Portfólio</a>
-        </li>
+        <span>
+          Desenvolvido por Luis Colucci |{" "}
+          <a
+            href="https://curriculo-643629858897.southamerica-east1.run.app/#inicio"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Meu Portfólio
+          </a>
+        </span>
       </div>
     </footer>
   );
