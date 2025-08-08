@@ -1,0 +1,74 @@
+# Nome do nosso workflow. Aparecerá na aba "Actions" do seu repositório GitHub.
+name: Deploy to Google Cloud Run
+
+# Define o gatilho: este workflow rodará toda vez que houver um push para a branch 'main'.
+on:
+  push:
+    branches:
+      - main
+
+# Define as variáveis de ambiente que usaremos em todo o workflow.
+# !! IMPORTANTE: REVISE E ALTERE ESTES VALORES !!
+env:
+  PROJECT_ID: marcia-art # O ID do seu projeto no Google Cloud
+  GCP_REGION: southamerica-east1 # A região que estamos usando (São Paulo)
+  REPO_NAME: marcia-art-repo # O nome do seu repositório no Artifact Registry
+
+# Define os "trabalhos" (jobs) que o workflow executará.
+jobs:
+  deploy:
+    # Define que este job precisa de permissão para escrever no Google Cloud.
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    # O job rodará em uma máquina virtual Linux fornecida pelo GitHub.
+    runs-on: ubuntu-latest
+
+    # Define os passos sequenciais do nosso deploy.
+    steps:
+      # 1. Clona o seu repositório para a máquina virtual.
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Autentica no Google Cloud usando a chave secreta que criamos.
+      - name: Authenticate to Google Cloud
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      # 3. Configura o gcloud CLI para usar nosso projeto.
+      - name: Set up Cloud SDK
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      # 4. Configura o Docker para poder enviar imagens para o Artifact Registry.
+      - name: Configure Docker
+        run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
+
+      # --- DEPLOY DO BACKEND (SERVER) ---
+      - name: Build and Push Backend Image
+        run: |-
+          docker build -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/server-image:${{ github.sha }} ./server
+          docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/server-image:${{ github.sha }}
+
+      - name: Deploy Backend to Cloud Run
+        run: |-
+          gcloud run deploy marcia-art-api \
+            --image ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/server-image:${{ github.sha }} \
+            --region ${{ env.GCP_REGION }} \
+            --platform managed \
+            --allow-unauthenticated
+
+      # --- DEPLOY DO FRONTEND (CLIENT) ---
+      - name: Build and Push Frontend Image
+        run: |-
+          docker build -t ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/client-image:${{ github.sha }} ./client
+          docker push ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/client-image:${{ github.sha }}
+
+      - name: Deploy Frontend to Cloud Run
+        run: |-
+          gcloud run deploy marcia-art-web \
+            --image ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/client-image:${{ github.sha }} \
+            --region ${{ env.GCP_REGION }} \
+            --platform managed \
+            --allow-unauthenticated
