@@ -1,22 +1,32 @@
 const express = require("express");
 const admin = require("firebase-admin");
-const cors = require("cors"); // 1. IMPORTA A BIBLIOTECA CORS
-const serviceAccount = require("./serviceAccountKey.json");
+const cors = require("cors");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// --- Bloco de Inicialização do Firebase com Tratamento de Erro ---
+try {
+  const serviceAccount = require("./serviceAccountKey.json");
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+  console.log("Firebase Admin SDK inicializado com sucesso!");
+} catch (error) {
+  console.error("ERRO CRÍTICO AO INICIALIZAR O FIREBASE ADMIN SDK:", error);
+  // Se a inicialização falhar, encerramos o processo para que o erro fique claro no Cloud Run
+  process.exit(1);
+}
+// --- Fim do Bloco de Inicialização ---
 
 const db = admin.firestore();
 const app = express();
-app.use(cors()); // 2. DIZ AO EXPRESS PARA USAR O CORS E LIBERAR O ACESSO
-const PORT = process.env.PORT || 3001; // Ouve na porta definida pelo Cloud Run, ou na 3001 como padrão para ambiente local.
+
+app.use(cors());
+
+const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
   res.send("Servidor do Projeto Marcia Art está no ar!");
 });
 
-// NOSSA NOVA ROTA DE API
 app.get("/api/obras", async (req, res) => {
   try {
     const obrasCollection = db.collection("obras");
