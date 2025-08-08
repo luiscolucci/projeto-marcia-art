@@ -45,6 +45,9 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
 
+      - name: Create Service Account Key File for Backend
+        run: echo '${{ secrets.GCP_SA_KEY }}' > server/serviceAccountKey.json
+
       # --- DEPLOY DO BACKEND (SERVER) ---
       - name: Build and Push Backend Image
         run: |-
