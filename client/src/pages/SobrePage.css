@@ -11,7 +11,7 @@
 
 .sobre-header h1 {
   font-size: 3rem;
-  color: #2C2C2C;
+  color: #2c2c2c;
 }
 
 .sobre-content {
@@ -52,3 +52,26 @@
   margin-bottom: 1.5rem;
   text-align: justify;
 }
+/* --- INÍCIO DA MELHORIA DE RESPONSIVIDADE --- */
+/* Esta regra só se aplica a telas com largura de 768px ou menos (celulares e tablets) */
+@media screen and (max-width: 768px) {
+  /* Muda o layout de 'lado a lado' para 'um em cima do outro' */
+  .sobre-content {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Centraliza a imagem e o texto */
+    gap: 2rem; /* Reduz o espaçamento entre a imagem e o texto */
+  }
+
+  .sobre-text-wrapper {
+    text-align: center; /* Centraliza o título "Marcia Santos" */
+  }
+
+  .sobre-text-wrapper p {
+    text-align: left; /* Mantém o parágrafo alinhado à esquerda para melhor leitura */
+  }
+
+  .sobre-header h1 {
+    font-size: 2.5rem; /* Reduz um pouco o título principal no mobile */
+  }
+}
+/* --- FIM DA MELHORIA DE RESPONSIVIDADE --- */
