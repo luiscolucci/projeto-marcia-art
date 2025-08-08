@@ -13,9 +13,7 @@ const GaleriaPage = () => {
     const fetchObras = async () => {
       try {
         // Faz a chamada para a nossa API no backend
-        const response = await fetch(
-          "https://server-image-923894154927.southamerica-east1.run.app/api/obras"
-        );
+        const response = await fetch("http://localhost:3001/api/obras");
 
         // Se a resposta não for OK (ex: erro 500 no servidor), lança um erro
         if (!response.ok) {
