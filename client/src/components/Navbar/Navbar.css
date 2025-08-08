@@ -1,65 +1,74 @@
+/* --- Estilos Base (Desktop) --- */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   background-color: #ffffff;
   border-bottom: 1px solid #eaeaea;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-height: 80px; /* Garante uma altura mínima */
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c2c2c; /* Nosso cinza escuro do logo */
+.navbar-logo a {
+  display: flex; /* Garante que o link ocupe o espaço da imagem */
+  align-items: center;
 }
 
+.navbar-logo-image {
+  height: 80px; /* Ajuste este valor como preferir */
+  width: auto;
+}
+
+/* Lista de links do desktop */
 .navbar-links-desktop {
-  display: flex;
+  display: flex; /* Já está correto */
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1.5rem; /* Espaçamento entre os links */
-  flex-wrap: nowrap; /* Adicione esta linha! Ela impede a quebra de linha. */
-  align-items: center; /* Alinha verticalmente os links com o logo */
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
-.navbar-links a {
+.navbar-links-desktop a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
-.navbar-links a:hover {
-  color: #007bff; /* Uma cor de destaque para quando passar o mouse */
+.navbar-links-desktop a:hover {
+  color: #007bff;
 }
 
-.navbar-logo-image {
-  height: 130px; /* Você pode ajustar esse valor como preferir */
-  width: auto; /* Mantém a proporção da imagem */
-}
-/* --- Estilos para o Menu Hambúrguer e Overlay --- */
-
+/* --- Ícone Hambúrguer (Começa Escondido) --- */
 .hamburger-icon {
-  display: none; /* Começa escondido em telas grandes */
+  display: none; /* Escondido por padrão */
   font-size: 1.8rem;
   cursor: pointer;
   color: #2c2c2c;
+  z-index: 1001; /* Z-index alto para ficar na frente */
 }
 
+/* Altera a cor do ícone de 'X' quando o menu está aberto */
+.hamburger-icon .fa-times {
+  color: #ffffff;
+}
+
+/* --- Menu Overlay (Mobile) --- */
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(44, 44, 44, 0.98); /* Fundo escuro semi-transparente */
-  z-index: 100; /* Garante que o menu fique acima de todo o resto */
+  background-color: rgba(44, 44, 44, 0.98);
+  z-index: 1000; /* Fica abaixo do ícone do 'X' mas acima do resto */
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
 .mobile-menu-links {
@@ -79,15 +88,16 @@
   font-weight: bold;
 }
 
-/* --- Media Query: A Mágica da Responsividade --- */
-/* Estes estilos só serão aplicados quando a tela for MENOR que 768px */
-
-@media screen and (max-width: 768px) {
-  .navbar-links-desktop {
-    display: none; /* Esconde os links do desktop */
+/* --- Media Query (A regra de responsividade) --- */
+/* Quando a tela for menor que 992px */
+@media screen and (max-width: 992px) {
+  /* Esconde o menu de links do desktop */
+  .navbar-container .navbar-links-desktop {
+    display: none;
   }
 
-  .hamburger-icon {
-    display: block; /* Mostra o ícone do hambúrguer */
+  /* Mostra o ícone do hambúrguer */
+  .navbar-container .hamburger-icon {
+    display: block;
   }
 }
