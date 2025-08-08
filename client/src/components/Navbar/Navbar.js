@@ -1,16 +1,20 @@
-import React, { useState } from "react"; // 1. Importa o useState
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logoImage from "../../assets/logo.png";
 
 const Navbar = () => {
-  // 2. Cria um estado para controlar se o menu móvel está aberto ou fechado
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 3. Função para alternar o estado do menu (abrir/fechar)
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen((s) => !s);
+
+  // trava o scroll do body quando o menu está aberto
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav className="navbar-container">
@@ -24,7 +28,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* 4. Menu para Desktop (links tradicionais) */}
+      {/* Desktop links */}
       <ul className="navbar-links-desktop">
         <li>
           <Link to="/">Home</Link>
@@ -46,16 +50,63 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* 5. Ícone do Hambúrguer (só aparecerá em telas pequenas) */}
-      <div className="hamburger-icon" onClick={toggleMenu}>
-        <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
-      </div>
+      {/* Botão hambúrguer - usa SVG embutido (não depende de FontAwesome) */}
+      <button
+        className="hamburger-icon"
+        onClick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+      >
+        {isMenuOpen ? (
+          // Ícone X
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : (
+          // Ícone hambúrguer
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M3 7h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M3 12h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M3 17h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        )}
+      </button>
 
-      {/* 6. Menu Móvel (overlay que aparece quando o menu está aberto) */}
+      {/* Menu móvel (overlay). Clique no overlay fecha, clique nos links também fecha. */}
       {isMenuOpen && (
-        <div className="mobile-menu-overlay">
-          <ul className="mobile-menu-links">
-            {/* Adicionamos o onClick para fechar o menu ao clicar em um link */}
+        <div className="mobile-menu-overlay" onClick={toggleMenu}>
+          <ul
+            className="mobile-menu-links"
+            onClick={(e) => e.stopPropagation()}
+          >
             <li>
               <Link to="/" onClick={toggleMenu}>
                 Home

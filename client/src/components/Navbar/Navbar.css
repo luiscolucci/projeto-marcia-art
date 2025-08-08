@@ -92,12 +92,21 @@
 /* Quando a tela for menor que 992px */
 @media screen and (max-width: 992px) {
   /* Esconde o menu de links do desktop */
-  .navbar-container .navbar-links-desktop {
+  .navbar-links-desktop {
     display: none;
   }
 
   /* Mostra o ícone do hambúrguer */
-  .navbar-container .hamburger-icon {
+  .hamburger-icon {
     display: block;
   }
+}
+/* Estilos para o botão hambúrguer para resetar a aparência padrão */
+.hamburger-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 28px; /* Tamanho do ícone */
+  height: 28px;
+  color: #2c2c2c;
 }

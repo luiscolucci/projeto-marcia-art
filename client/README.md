@@ -68,18 +68,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-*****************************************************************************************************
-
-Passo 1: Instalação do React Router
-Abra o seu terminal. Se o seu servidor de desenvolvimento (npm start) estiver rodando, você pode pará-lo por um momento apertando Ctrl + C, ou pode abrir um novo terminal.
-
-Certifique-se de que você está no diretório correto, a pasta client. Se não estiver, navegue até ela.
-
-Execute o seguinte comando:
-
-Bash
-
-npm install react-router-dom
-
-Este comando vai baixar a biblioteca e adicioná-la como uma dependência ao package.json do nosso projeto client.
