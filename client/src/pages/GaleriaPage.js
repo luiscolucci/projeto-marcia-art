@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; // 1. Importa useState e useEffect
-import './GaleriaPage.css';
+import React, { useState, useEffect } from "react"; // 1. Importa useState e useEffect
+import "./GaleriaPage.css";
 
 const GaleriaPage = () => {
   // 2. Cria estados para guardar as obras, o status de carregamento e possíveis erros
@@ -13,16 +13,18 @@ const GaleriaPage = () => {
     const fetchObras = async () => {
       try {
         // Faz a chamada para a nossa API no backend
-        const response = await fetch('http://localhost:3001/api/obras');
-        
+        const response = await fetch(
+          "https://server-image-923894154927.southamerica-east1.run.app/api/obras"
+        );
+
         // Se a resposta não for OK (ex: erro 500 no servidor), lança um erro
         if (!response.ok) {
-          throw new Error('Falha ao buscar dados do servidor');
+          throw new Error("Falha ao buscar dados do servidor");
         }
-        
+
         // Converte a resposta para JSON
         const data = await response.json();
-        
+
         // Atualiza nosso estado com os dados recebidos
         setObras(data);
       } catch (err) {
@@ -39,11 +41,19 @@ const GaleriaPage = () => {
 
   // 4. Lógica de renderização condicional
   if (loading) {
-    return <div className="gallery-page-container"><p>Carregando obras...</p></div>;
+    return (
+      <div className="gallery-page-container">
+        <p>Carregando obras...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="gallery-page-container"><p>Erro: {error}</p></div>;
+    return (
+      <div className="gallery-page-container">
+        <p>Erro: {error}</p>
+      </div>
+    );
   }
 
   return (
@@ -54,7 +64,11 @@ const GaleriaPage = () => {
         {obras.map((item) => (
           <div key={item.id} className="gallery-card">
             {/* O caminho da imagem agora precisa ser construído, já que o backend só nos dá o nome do arquivo */}
-            <img src={require(`../assets/${item.image}`)} alt={item.title} className="gallery-image" />
+            <img
+              src={require(`../assets/${item.image}`)}
+              alt={item.title}
+              className="gallery-image"
+            />
             <div className="gallery-card-overlay">
               <h3 className="gallery-card-title">{item.title}</h3>
               <p className="gallery-card-description">{item.description}</p>

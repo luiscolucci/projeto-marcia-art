@@ -11,15 +11,17 @@
 .navbar-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #2C2C2C; /* Nosso cinza escuro do logo */
+  color: #2c2c2c; /* Nosso cinza escuro do logo */
 }
 
-.navbar-links {
+.navbar-links-desktop {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
   gap: 1.5rem; /* Espaçamento entre os links */
+  flex-wrap: nowrap; /* Adicione esta linha! Ela impede a quebra de linha. */
+  align-items: center; /* Alinha verticalmente os links com o logo */
 }
 
 .navbar-links a {
@@ -36,4 +38,56 @@
 .navbar-logo-image {
   height: 130px; /* Você pode ajustar esse valor como preferir */
   width: auto; /* Mantém a proporção da imagem */
+}
+/* --- Estilos para o Menu Hambúrguer e Overlay --- */
+
+.hamburger-icon {
+  display: none; /* Começa escondido em telas grandes */
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(44, 44, 44, 0.98); /* Fundo escuro semi-transparente */
+  z-index: 100; /* Garante que o menu fique acima de todo o resto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mobile-menu-links {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-menu-links li {
+  margin: 2rem 0;
+}
+
+.mobile-menu-links a {
+  color: #ffffff;
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* --- Media Query: A Mágica da Responsividade --- */
+/* Estes estilos só serão aplicados quando a tela for MENOR que 768px */
+
+@media screen and (max-width: 768px) {
+  .navbar-links-desktop {
+    display: none; /* Esconde os links do desktop */
+  }
+
+  .hamburger-icon {
+    display: block; /* Mostra o ícone do hambúrguer */
+  }
 }
