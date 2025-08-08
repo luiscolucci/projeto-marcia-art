@@ -12,7 +12,7 @@ const LojaPage = () => {
       try {
         // A chamada é para a MESMA API, pois ela já retorna todos os dados que precisamos
         const response = await fetch(
-          "https://server-image-923894154927.southamerica-east1.run.app/api/obras"
+          "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
         );
 
         if (!response.ok) {
