@@ -98,10 +98,18 @@ const ContatoPage = () => {
 
           <h3>Redes Sociais</h3>
           <div className="social-icons-contact">
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/marciasantosart?igsh=cTI1aTRvZnVnbTBs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/share/19DLN1hnaC/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fab fa-facebook-f"></i>
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer">
