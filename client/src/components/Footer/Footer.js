@@ -50,14 +50,14 @@ const Footer = () => {
           {/* VOLTAMOS A USAR AS TAGS <i> DO FONT AWESOME */}
           <div className="social-icons">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/marciasantosart?igsh=cTI1aTRvZnVnbTBs"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fab fa-instagram"></i>
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/19DLN1hnaC/"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -88,7 +88,7 @@ const ContatoPage = () => {
           <p>
             <strong>Telefone:</strong>
             <br />
-            (11) 99999-8888
+            (11) 98865-5838
           </p>
           <p>
             <strong>Ateliê:</strong>
