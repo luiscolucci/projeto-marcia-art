@@ -1,20 +1,24 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // 1. Importa as ferramentas do Router
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom"; // 1. Importa as ferramentas do Router
 
 // Importa os componentes que se repetem em todas as páginas
-import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer';
-import ScrollToTop from './components/ScrollToTop';
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Importa os componentes de cada página
-import HomePage from './pages/HomePage';
-import GaleriaPage from './pages/GaleriaPage';
-import LojaPage from './pages/LojaPage';
-import SobrePage from './pages/SobrePage';
-import TimelinePage from './pages/TimelinePage';
-import ContatoPage from './pages/ContatoPage';
+import HomePage from "./pages/HomePage";
+import GaleriaPage from "./pages/GaleriaPage";
+import LojaPage from "./pages/LojaPage";
+import SobrePage from "./pages/SobrePage";
+import TimelinePage from "./pages/TimelinePage";
+import ContatoPage from "./pages/ContatoPage";
+import LoginPage from "./pages/LoginPage"; // 1. IMPORTA A NOVA PÁGINA
+//import LoginPage from "./pages/LoginPage";
+import ProtectedRoute from "./components/ProtectedRoute"; // 1. IMPORTA A ROTA PROTEGIDA
+import AdminDashboard from "./pages/AdminDashboard"; // 2. IMPORTA O DASHBOARD
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -25,7 +29,7 @@ function App() {
       <div className="App">
         {/* 3. Navbar e Footer ficam FORA do 'Routes' para aparecerem em todas as páginas */}
         <Navbar />
-        
+
         <main>
           {/* 4. O 'Routes' define a área onde o conteúdo das páginas vai mudar */}
           <Routes>
@@ -36,6 +40,19 @@ function App() {
             <Route path="/sobre" element={<SobrePage />} />
             <Route path="/linha-do-tempo" element={<TimelinePage />} />
             <Route path="/contato" element={<ContatoPage />} />
+            <Route path="/contato" element={<ContatoPage />} />
+            <Route path="/login" element={<LoginPage />} />{" "}
+            {/* 2. ADICIONA A NOVA ROTA */}
+            <Route path="/login" element={<LoginPage />} />
+            {/* 3. ROTA PROTEGIDA */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
 
