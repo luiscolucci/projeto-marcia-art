@@ -1,33 +1,114 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import "./AdminDashboard.css"; // Importa nosso novo estilo
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [obras, setObras] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Função para buscar as obras da API
+  const fetchObras = async () => {
+    try {
+      const response = await fetch(
+        "https://marcia-art-web-923894154927.southamerica-east1.run.app/api/obras"
+      );
+      const data = await response.json();
+      setObras(data);
+    } catch (error) {
+      console.error("Erro ao buscar obras:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Busca as obras quando a página carrega
+  useEffect(() => {
+    fetchObras();
+  }, []);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/login"); // Redireciona para o login após o logout
+      navigate("/login");
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
   };
 
+  const handleDelete = async (id) => {
+    // Pede confirmação antes de deletar
+    if (
+      window.confirm(
+        "Tem certeza que deseja deletar esta obra? Esta ação não pode ser desfeita."
+      )
+    ) {
+      try {
+        await fetch(
+          `https://marcia-art-web-923894154927.southamerica-east1.run.app/api/obras/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        // Atualiza a lista de obras na tela, removendo a que foi deletada
+        setObras(obras.filter((obra) => obra.id !== id));
+      } catch (error) {
+        console.error("Erro ao deletar obra:", error);
+        alert("Falha ao deletar a obra.");
+      }
+    }
+  };
+
+  if (loading) {
+    return <div>Carregando painel...</div>;
+  }
+
   return (
-    <div style={{ padding: "4rem 2rem" }}>
-      <h1>Bem-vindo ao Painel de Controle</h1>
-      <p>
-        Esta é a área administrativa. Em breve, aqui estarão as ferramentas para
-        gerenciar as obras.
-      </p>
-      <button
-        onClick={handleLogout}
-        style={{ padding: "10px 20px", fontSize: "1rem", cursor: "pointer" }}
-      >
-        Sair (Logout)
-      </button>
+    <div className="admin-dashboard">
+      <div className="admin-header">
+        <h1>Painel de Controle</h1>
+        <button onClick={handleLogout} className="logout-button">
+          Sair (Logout)
+        </button>
+      </div>
+
+      <table className="obras-table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {obras.map((obra) => (
+            <tr key={obra.id}>
+              <td>{obra.title}</td>
+              <td>{obra.description}</td>
+              <td>
+                {obra.price.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </td>
+              <td>{obra.isAvailable ? "Disponível" : "Vendido"}</td>
+              <td className="action-buttons">
+                <button>Editar</button>
+                <button
+                  onClick={() => handleDelete(obra.id)}
+                  className="delete-button"
+                >
+                  Deletar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

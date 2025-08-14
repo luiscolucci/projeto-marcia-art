@@ -51,6 +51,18 @@ app.get("/api/obras", async (req, res) => {
   }
 });
 
+// ROTA PARA DELETAR UMA OBRA
+app.delete("/api/obras/:id", async (req, res) => {
+  try {
+    const obraId = req.params.id;
+    await db.collection("obras").doc(obraId).delete();
+    res.status(200).send(`Obra com ID ${obraId} deletada com sucesso.`);
+  } catch (error) {
+    console.error("Erro ao deletar obra: ", error);
+    res.status(500).send("Erro no servidor ao deletar obra.");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
