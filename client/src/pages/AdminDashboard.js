@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom"; // Importações limpas
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [obras, setObras] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(""); // Adicionado estado de erro
+  const [error, setError] = useState("");
 
-  // Função para buscar as obras da API
-  const fetchObras = async () => {
-    try {
-      const response = await fetch(
-        "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
-      );
-      if (!response.ok) {
-        throw new Error(
-          "Falha ao buscar obras. Verifique a conexão com a API."
-        );
-      }
-      const data = await response.json();
-      setObras(data);
-    } catch (error) {
-      console.error("Erro ao buscar obras:", error);
-      setError(error.message); // Guarda a mensagem de erro
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Define a URL da API que será usada
+  const API_URL =
+    "https://marcia-art-api-923894154927.southamerica-east1.run.app";
 
-  // Busca as obras quando a página carrega
   useEffect(() => {
+    const fetchObras = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/obras`);
+
+        if (!response.ok) {
+          throw new Error(`Falha ao buscar dados: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setObras(data);
+      } catch (err) {
+        console.error("Erro ao buscar obras:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchObras();
-  }, []);
+  }, []); // O array vazio garante que a busca só acontece uma vez
 
   const handleLogout = async () => {
     try {
@@ -52,27 +52,31 @@ const AdminDashboard = () => {
       )
     ) {
       try {
-        await fetch(
-          `https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${API_URL}/api/obras/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error("Falha ao deletar a obra.");
+        }
         setObras(obras.filter((obra) => obra.id !== id));
-      } catch (error) {
-        console.error("Erro ao deletar obra:", error);
-        alert("Falha ao deletar a obra.");
+      } catch (err) {
+        console.error("Erro ao deletar obra:", err);
+        alert(err.message);
       }
     }
   };
 
   if (loading) {
-    return <div>Carregando painel...</div>;
+    return <div className="admin-dashboard">Carregando painel...</div>;
   }
 
-  // Se houver um erro na busca dos dados, mostra a mensagem
   if (error) {
-    return <div>Erro: {error}</div>;
+    return (
+      <div className="admin-dashboard">
+        <h1>Erro ao carregar dados</h1>
+        <p>{error}</p>
+      </div>
+    );
   }
 
   return (
@@ -80,7 +84,6 @@ const AdminDashboard = () => {
       <div className="admin-header">
         <h1>Painel de Controle</h1>
         <div className="header-buttons">
-          {/* BOTÃO ADICIONADO AQUI */}
           <Link to="/admin/nova-obra">
             <button className="add-obra-button">Adicionar Nova Obra</button>
           </Link>
@@ -107,7 +110,6 @@ const AdminDashboard = () => {
                 <td>{obra.title}</td>
                 <td>{obra.description}</td>
                 <td>
-                  {/* Adicionada verificação para evitar erro se o preço não existir */}
                   {obra.price
                     ? obra.price.toLocaleString("pt-BR", {
                         style: "currency",
@@ -132,7 +134,7 @@ const AdminDashboard = () => {
           ) : (
             <tr>
               <td colSpan="5" style={{ textAlign: "center" }}>
-                Nenhuma obra encontrada.
+                Nenhuma obra encontrada no banco de dados.
               </td>
             </tr>
           )}
