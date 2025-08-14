@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AdminDashboard.css"; // Importa nosso novo estilo
 
 const AdminDashboard = () => {
@@ -97,7 +97,9 @@ const AdminDashboard = () => {
               </td>
               <td>{obra.isAvailable ? "Disponível" : "Vendido"}</td>
               <td className="action-buttons">
-                <button>Editar</button>
+                <Link to={`/admin/editar/${obra.id}`}>
+                  <button className="edit-button">Editar</button>
+                </Link>
                 <button
                   onClick={() => handleDelete(obra.id)}
                   className="delete-button"

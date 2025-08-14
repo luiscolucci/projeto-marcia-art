@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage"; // 1. IMPORTA A NOVA PÁGINA
 //import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute"; // 1. IMPORTA A ROTA PROTEGIDA
 import AdminDashboard from "./pages/AdminDashboard"; // 2. IMPORTA O DASHBOARD
+import EditObraPage from "./pages/EditObraPage";
 
 import "./App.css";
 
@@ -41,15 +42,29 @@ function App() {
             <Route path="/linha-do-tempo" element={<TimelinePage />} />
             <Route path="/contato" element={<ContatoPage />} />
             <Route path="/contato" element={<ContatoPage />} />
-            <Route path="/login" element={<LoginPage />} />{" "}
-            {/* 2. ADICIONA A NOVA ROTA */}
             <Route path="/login" element={<LoginPage />} />
-            {/* 3. ROTA PROTEGIDA */}
+            <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin"
               element={
                 <ProtectedRoute>
                   <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/editar/:obraId"
+              element={
+                <ProtectedRoute>
+                  <EditObraPage />
                 </ProtectedRoute>
               }
             />
