@@ -19,7 +19,14 @@ try {
 const db = admin.firestore();
 const app = express();
 
-app.use(cors());
+// Configuração explícita do CORS para aceitar mais métodos
+app.use(
+  cors({
+    origin: "*", // Permite qualquer origem. Para produção, poderia ser o domínio do seu site.
+    methods: ["GET", "POST", "PUT", "DELETE"], // Libera os métodos que nossa API usa
+    allowedHeaders: ["Content-Type"], // Libera cabeçalhos comuns
+  })
+);
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
