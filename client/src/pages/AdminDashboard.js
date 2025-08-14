@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   const fetchObras = async () => {
     try {
       const response = await fetch(
-        "https://marcia-art-web-923894154927.southamerica-east1.run.app/api/obras"
+        "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
       );
       const data = await response.json();
       setObras(data);
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
     ) {
       try {
         await fetch(
-          `https://marcia-art-web-923894154927.southamerica-east1.run.app/api/obras/${id}`,
+          `https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras/${id}`,
           {
             method: "DELETE",
           }
