@@ -1,6 +1,7 @@
-const express = require("express");
+const express = require("express"); // CORREÇÃO: Linha descomentada
 const admin = require("firebase-admin");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 // --- Bloco de Inicialização do Firebase com Tratamento de Erro ---
 try {
@@ -11,7 +12,6 @@ try {
   console.log("Firebase Admin SDK inicializado com sucesso!");
 } catch (error) {
   console.error("ERRO CRÍTICO AO INICIALIZAR O FIREBASE ADMIN SDK:", error);
-  // Se a inicialização falhar, encerramos o processo para que o erro fique claro no Cloud Run
   process.exit(1);
 }
 // --- Fim do Bloco de Inicialização ---
@@ -20,13 +20,18 @@ const db = admin.firestore();
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
 
+// --- DEFINIÇÃO DAS ROTAS DA API ---
+
+// Rota de teste
 app.get("/", (req, res) => {
   res.send("Servidor do Projeto Marcia Art está no ar!");
 });
 
+// Rota para BUSCAR (GET) todas as obras
 app.get("/api/obras", async (req, res) => {
   try {
     const obrasCollection = db.collection("obras");
@@ -51,7 +56,22 @@ app.get("/api/obras", async (req, res) => {
   }
 });
 
-// ROTA PARA DELETAR UMA OBRA
+// Rota para ATUALIZAR (PUT) uma obra específica
+app.put("/api/obras/:id", async (req, res) => {
+  try {
+    const obraId = req.params.id;
+    const updatedData = req.body;
+
+    await db.collection("obras").doc(obraId).update(updatedData);
+
+    res.status(200).json({ id: obraId, ...updatedData });
+  } catch (error) {
+    console.error("Erro ao atualizar obra: ", error);
+    res.status(500).send("Erro no servidor ao atualizar obra.");
+  }
+});
+
+// Rota para DELETAR (DELETE) uma obra específica
 app.delete("/api/obras/:id", async (req, res) => {
   try {
     const obraId = req.params.id;
@@ -63,6 +83,7 @@ app.delete("/api/obras/:id", async (req, res) => {
   }
 });
 
+// Inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
