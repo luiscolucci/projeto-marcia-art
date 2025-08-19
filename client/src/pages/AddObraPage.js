@@ -25,7 +25,6 @@ const AddObraPage = () => {
     setLoading(true);
     setError("");
 
-    // FormData é necessário para enviar arquivos
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -33,17 +32,24 @@ const AddObraPage = () => {
     formData.append("isAvailable", isAvailable);
     formData.append("image", imageFile);
 
-    try {
-      const response = await fetch(
-        "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras",
-        {
-          method: "POST",
-          body: formData, // Ao usar FormData, o navegador define o 'Content-Type' correto
-        }
-      );
+    // --- ALTERAÇÃO 1: URL da API dinâmica ---
+    // Define a URL correta dependendo se o ambiente é de produção ou desenvolvimento
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
+        : "http://localhost:3001/api/obras";
 
+    try {
+      const response = await fetch(apiUrl, { // Usando a variável apiUrl
+        method: "POST",
+        body: formData,
+      });
+      
+      // --- ALTERAÇÃO 2: Melhor tratamento de erros ---
       if (!response.ok) {
-        throw new Error("Falha ao criar a obra.");
+        // Tenta extrair uma mensagem de erro específica do backend
+        const errorData = await response.json().catch(() => ({ message: "Falha ao criar a obra. O servidor não respondeu com um erro detalhado." }));
+        throw new Error(errorData.message);
       }
 
       alert("Obra adicionada com sucesso!");
@@ -88,11 +94,12 @@ const AddObraPage = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
+            step="0.01" // Adicionado para permitir casas decimais
           />
         </div>
         <div className="form-group">
           <label htmlFor="image">Imagem da Obra</label>
-          <input type="file" id="image" onChange={handleFileChange} required />
+          <input type="file" id="image" onChange={handleFileChange} required accept="image/*" /> {/* Adicionado para aceitar apenas imagens */}
         </div>
         <div className="form-group-checkbox">
           <label htmlFor="isAvailable">Disponível para venda</label>

@@ -10,7 +10,7 @@ try {
   const serviceAccount = require("./serviceAccountKey.json");
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: "marcia-art.appspot.com", // Verifique se este nome está correto
+    storageBucket: "marcia-art.firebasestorage.app", // Verifique se este nome está correto
   });
   console.log("Firebase Admin SDK inicializado com sucesso!");
 } catch (error) {

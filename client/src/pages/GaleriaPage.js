@@ -1,80 +1,82 @@
-import React, { useState, useEffect } from "react"; // 1. Importa useState e useEffect
+import React, { useState, useEffect } from "react";
 import "./GaleriaPage.css";
 
 const GaleriaPage = () => {
-  // 2. Cria estados para guardar as obras, o status de carregamento e possíveis erros
   const [obras, setObras] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 3. O useEffect executa esta função assim que o componente é montado
   useEffect(() => {
-    // A função que busca os dados da nossa API
     const fetchObras = async () => {
       try {
-        // Faz a chamada para a nossa API no backend
-        const response = await fetch(
-          "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
-        );
+        const apiUrl =
+          process.env.NODE_ENV === "production"
+            ? "https://marcia-art-api-923894154927.southamerica-east1.run.app/api/obras"
+            : "http://localhost:3001/api/obras";
 
-        // Se a resposta não for OK (ex: erro 500 no servidor), lança um erro
+        const response = await fetch(apiUrl);
+
         if (!response.ok) {
           throw new Error("Falha ao buscar dados do servidor");
         }
 
-        // Converte a resposta para JSON
         const data = await response.json();
-
-        // Atualiza nosso estado com os dados recebidos
         setObras(data);
       } catch (err) {
-        // Se houver qualquer erro na chamada, atualiza o estado de erro
         setError(err.message);
       } finally {
-        // Independente de sucesso ou erro, para de carregar
         setLoading(false);
       }
     };
 
-    fetchObras(); // Executa a função de busca
-  }, []); // O [] vazio garante que isso execute apenas uma vez
+    fetchObras();
+  }, []);
 
-  // 4. Lógica de renderização condicional
   if (loading) {
-    return (
-      <div className="gallery-page-container">
-        <p>Carregando obras...</p>
-      </div>
-    );
+    return <div className="gallery-page-container"><p>Carregando obras...</p></div>;
   }
 
   if (error) {
-    return (
-      <div className="gallery-page-container">
-        <p>Erro: {error}</p>
-      </div>
-    );
+    return <div className="gallery-page-container"><p>Erro: {error}</p></div>;
   }
 
   return (
     <div className="gallery-page-container">
       <h1 className="gallery-title">Galeria de Arte</h1>
       <div className="gallery-grid">
-        {/* 5. Mapeia sobre o estado 'obras', que agora contém os dados da API */}
-        {obras.map((item) => (
-          <div key={item.id} className="gallery-card">
-            {/* O caminho da imagem agora precisa ser construído, já que o backend só nos dá o nome do arquivo */}
-            <img
-              src={require(`../assets/${item.image}`)}
-              alt={item.title}
-              className="gallery-image"
-            />
-            <div className="gallery-card-overlay">
-              <h3 className="gallery-card-title">{item.title}</h3>
-              <p className="gallery-card-description">{item.description}</p>
+        {obras.map((item) => {
+          
+          // --- LÓGICA INTELIGENTE PARA LIDAR COM AMBOS OS SISTEMAS ---
+          let imageUrl;
+          // Verifica se o campo 'image' já é uma URL completa (obras novas)
+          if (item.image && typeof item.image === 'string' && item.image.startsWith('http')) {
+            imageUrl = item.image;
+          } else {
+            // Se for só um nome de arquivo, usa o `require` (obras antigas)
+            try {
+              imageUrl = require(`../assets/${item.image}`);
+            } catch (e) {
+              // Se a imagem local não for encontrada, usa um placeholder ou null
+              console.error(`Imagem local não encontrada: ../assets/${item.image}`);
+              imageUrl = ''; // ou uma imagem placeholder
+            }
+          }
+          // ----------------------------------------------------------------
+
+          return (
+            <div key={item.id} className="gallery-card">
+              <img
+                src={imageUrl}
+                alt={item.title}
+                className="gallery-image"
+              />
+              <div className="gallery-card-overlay">
+                <h3 className="gallery-card-title">{item.title}</h3>
+                <p className="gallery-card-description">{item.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
